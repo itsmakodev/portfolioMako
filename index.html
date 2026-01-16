@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>itsmako | Creador de contenido Pokémon VGC</title>
+  <meta name="description" content="itsmako – creador de contenido Pokémon. Competitivo VGC, análisis, directos y vídeos sobre Pokémon." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: #020617;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --accent: #a855f7;
+      --accent-2: #22c55e;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background:
+        linear-gradient(rgba(15,23,42,0.8), rgba(15,23,42,0.8)),
+        url("https://wallpapercave.com/wp/wp2566702.jpg") center / cover no-repeat fixed;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 32px 20px 64px; }
+
+    header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 64px; }
+    .logo { font-weight: 700; letter-spacing: 0.5px; font-size: 1.1rem; }
+    nav a { color: var(--muted); text-decoration: none; margin-left: 20px; font-weight: 500; }
+    nav a:hover { color: var(--accent); }
+
+    .hero { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 40px; align-items: center; margin-bottom: 96px; position: relative; border-radius: 28px; }
+
+    .badge { display: inline-block; padding: 6px 14px; border-radius: 999px; background: rgba(168,85,247,.2); color: #e9d5ff; font-size: 0.8rem; font-weight: 700; margin-bottom: 16px; letter-spacing: 0.5px; }
+    .live-badge { background: linear-gradient(135deg, #ef4444, #dc2626); color: white; box-shadow: 0 0 0 1px rgba(239,68,68,.5), 0 0 25px rgba(239,68,68,.8); animation: live-pulse 1.5s infinite; }
+
+    @keyframes live-pulse { 0% { box-shadow: 0 0 0 1px rgba(239,68,68,.6), 0 0 15px rgba(239,68,68,.6); } 50% { box-shadow: 0 0 0 2px rgba(239,68,68,.9), 0 0 35px rgba(239,68,68,1); } 100% { box-shadow: 0 0 0 1px rgba(239,68,68,.6), 0 0 15px rgba(239,68,68,.6); } }
+
+    h1 { font-size: clamp(2.4rem, 4vw, 3.4rem); line-height: 1.15; margin: 0 0 16px; }
+    .subtitle { color: var(--muted); font-size: 1.05rem; max-width: 520px; margin-bottom: 28px; margin-left: auto; margin-right: auto; }
+    .cta { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+
+    .btn { padding: 12px 20px; border-radius: 10px; border: 1px solid transparent; font-weight: 600; cursor: pointer; text-decoration: none; transition: transform .15s ease, box-shadow .15s ease, background .15s ease; }
+    .btn-primary { background: linear-gradient(135deg, #a855f7, #9333ea); color: #020617; box-shadow: 0 0 0 1px rgba(168,85,247,.35), 0 10px 40px rgba(168,85,247,.55); }
+    .btn-primary:hover { transform: translateY(-1px) scale(1.02); box-shadow: 0 0 0 1px rgba(168,85,247,.55), 0 15px 60px rgba(168,85,247,.75); }
+    .btn-secondary { background: transparent; border-color: #1e293b; color: var(--text); }
+    .btn-secondary:hover { background: #020617; }
+
+    .avatar-img { width: 260px; height: 260px; object-fit: cover; border-radius: 24px; box-shadow: 0 0 0 2px rgba(168,85,247,.6), 0 0 60px rgba(168,85,247,.6); margin: 0 auto; }
+
+    .sprite-row { display: flex; gap: 14px; margin-top: 28px; align-items: center; flex-wrap: wrap; }
+    .sprite-row img { width: 72px; height: 72px; image-rendering: pixelated; filter: drop-shadow(0 0 6px rgba(168,85,247,.6)); transition: transform .2s ease, filter .2s ease; cursor: pointer; }
+    .sprite-row img:hover { transform: translateY(-6px) scale(1.15); filter: drop-shadow(0 0 14px rgba(168,85,247,1)); }
+
+    .particle { position: absolute; width: 8px; height: 8px; border-radius: 50%; background: rgba(168,85,247,0.7); animation: float 4s infinite; }
+    @keyframes float { 0% { transform: translateY(0) scale(1); opacity: 0.8; } 50% { transform: translateY(-20px) scale(1.5); opacity: 0.4; } 100% { transform: translateY(0) scale(1); opacity: 0.8; } }
+
+    section { margin-bottom: 96px; }
+    section h2 { font-size: 2rem; margin-bottom: 12px; }
+    section p.section-desc { color: var(--muted); max-width: 600px; margin-bottom: 40px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
+    .card { position: relative; background: linear-gradient(180deg, #020617, #020617); border: 1px solid rgba(168,85,247,.15); border-radius: 18px; padding: 24px; box-shadow: inset 0 0 0 1px rgba(168,85,247,.08), 0 10px 30px rgba(0,0,0,.35); transition: transform .2s ease, box-shadow .2s ease; }
+    .card h3 { margin-top: 0; margin-bottom: 8px; font-size: 1.1rem; color: #e9d5ff; }
+    .card:hover { transform: translateY(-4px); box-shadow: inset 0 0 0 1px rgba(168,85,247,.25), 0 20px 60px rgba(168,85,247,.35); }
+
+    footer { border-top: 1px solid #020617; padding-top: 32px; color: var(--muted); font-size: 0.9rem; display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; }
+    .social a { color: var(--muted); margin-right: 14px; text-decoration: none; font-weight: 500; }
+    .social a:hover { color: #c084fc; text-shadow: 0 0 12px rgba(168,85,247,.75); }
+
+    @media (max-width: 900px) { .hero { grid-template-columns: 1fr; text-align: center; } }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">itsmako</div>
+      <nav>
+        <a href="#sobre">Sobre mí</a>
+        <a href="#contacto">Contenido</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div>
+          <span class="badge live-badge">🔴 EN DIRECTO</span>
+          <h1>Hola, soy <span style="color:var(--accent)">itsmako</span></h1>
+          <p class="subtitle">Streamer de Pokémon competitivo (VGC), directos casi diarios, análisis de meta y contenido para entrenadores que quieren subir de nivel.</p>
+
+          <div class="sprite-row" id="spriteRow"></div>
+        </div>
+        <img src="https://i.imgur.com/GhXGSBk.jpg" alt="itsmako avatar" class="avatar-img" />
+
+        <!-- Partículas glow -->
+        <div class="particle" style="top:20%; left:10%;"></div>
+        <div class="particle" style="top:50%; left:80%;"></div>
+        <div class="particle" style="top:70%; left:30%;"></div>
+        <div class="particle" style="top:40%; left:60%;"></div>
+        <div class="particle" style="top:25%; left:50%;"></div>
+      </section>
+
+      <section id="sobre">
+        <h2>Sobre mí</h2>
+        <p class="section-desc">Soy creador de contenido especializado en Pokémon, centrado en el competitivo VGC, análisis de equipos, meta actual y contenido para ayudar a otros entrenadores a mejorar.</p>
+        <div class="grid">
+          <div class="card"><h3>⚔️ Pokémon VGC</h3><p>Análisis del metajuego, equipos competitivos y estrategias.</p></div>
+          <div class="card"><h3>📺 Directos</h3><p>Streams en Twitch jugando, analizando partidas y charlando con la comunidad.</p></div>
+          <div class="card"><h3>🎥 Contenido</h3><p>Vídeos educativos y de entretenimiento sobre Pokémon.</p></div>
+        </div>
+      </section>
+
+      <section id="contacto">
+        <h2>Contacto</h2>
+        <p class="section-desc">¿Colaboraciones o preguntas? Puedes encontrarme aquí:</p>
+        <div class="grid">
+          <div class="card"><h3>Email</h3><p>makomusicvz@gmail.com</p></div>
+          <div class="card"><h3>Redes</h3><p>
+            <a href="https://youtube.com/@itsmakovgc" target="_blank">YouTube</a> ·
+            <a href="https://x.com/itsmakovgc" target="_blank">X / Twitter</a> ·
+            <a href="https://twitch.tv/itsmakovgc" target="_blank">Twitch</a> ·
+            <a href="https://tiktok.com/@itsmakovgc" target="_blank">TikTok</a>
+          </p></div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div>© 2026 itsmako</div>
+      <div class="social">
+        <a href="https://youtube.com/@itsmakovgc" target="_blank" rel="noopener">YouTube</a>
+        <a href="https://x.com/itsmakovgc" target="_blank" rel="noopener">X</a>
+        <a href="https://twitch.tv/itsmakovgc" target="_blank" rel="noopener">Twitch</a>
+        <a href="https://tiktok.com/@itsmakovgc" target="_blank" rel="noopener">TikTok</a>
+      </div>
+    </footer>
+  </div>
+
+<script>
+  const pokemonSprites = [
+    'bulbasaur','ivysaur','venusaur','charmander','charmeleon','charizard','squirtle','wartortle','blastoise',
+    'caterpie','metapod','butterfree','weedle','kakuna','beedrill','pidgey','pidgeotto','pidgeot',
+    'rattata','raticate','spearow','fearow','ekans','arbok','pikachu','raichu',
+    'sandshrew','sandslash','nidoran-f','nidorina','nidoqueen','nidoran-m','nidorino','nidoking','clefairy','clefable','vulpix','ninetales','jigglypuff','wigglytuff','zubat','golbat','oddish','gloom','vileplume','paras','parasect','venonat','venomoth','diglett','dugtrio','meowth','persian','psyduck','golduck','mankey','primeape','growlithe','arcanine','poliwag','poliwhirl','poliwrath','abra','kadabra','alakazam','machop','machoke','machamp','bellsprout','weepinbell','victreebel','tentacool','tentacruel','geodude','graveler','golem','ponyta','rapidash','slowpoke','slowbro','magnemite','magneton','farfetchd','doduo','dodrio','seel','dewgong','grimer','muk','shellder','cloyster','gastly','haunter','gengar','onix','drowzee','hypno','krabby','kingler','voltorb','electrode','exeggcute','exeggutor','cubone','marowak','hitmonlee','hitmonchan','lickitung','koffing','weezing','rhyhorn','rhydon','chansey','tangela','kangaskhan','horsea','seadra','goldeen','seaking','staryu','starmie','mr-mime','scyther','jynx','electabuzz','magmar','pinsir','tauros','magikarp','gyarados','lapras','ditto','eevee','vaporeon','jolteon','flareon','porygon','omanyte','omastar','kabuto','kabutops','aerodactyl','snorlax','articuno','zapdos','moltres','dratini','dragonair','dragonite','mewtwo','mew'
+  ];
+
+  function loadRandomSprites() {
+    const row = document.getElementById('spriteRow');
+    if (!row) return;
+    const shuffled = pokemonSprites.sort(() => 0.5 - Math.random());
+    const selected = shuffled.slice(0, 4);
+    row.innerHTML = selected.map(name => `<img src="https://img.pokemondb.net/sprites/black-white/anim/normal/${name}.gif" alt="${name}" />`).join('');
+  }
+
+  loadRandomSprites();
+</script>
+</body>
+</html>
